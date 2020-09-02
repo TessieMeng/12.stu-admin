@@ -272,7 +272,7 @@ server.listen(8080)
 
 
 
-// 5.4 crypto模块
+// 5.4 crypto加密算法模块
 // MD5和SHA1
 // MD5是一种hash算法，用于给任意数据一个签名，签名用16进制字符串表示
 const crypto = require('crypto')
@@ -289,3 +289,97 @@ const hmac = crypto.createHmac('sha256', 'secret-key')
 hmac.update('hello, world')
 hmac.update('hello, nodejs')
 console.log(hmac.digest('hex'))
+
+// AES:对称加密算法
+const crypto = require('crypto')
+
+function aesEncrypt(data, key){
+    const cipher = crypto.createCipher('aes192', key)
+    var crypted = cipher.update(data, 'utf8', 'hex')
+    crypted += cipher.final('hex')
+    return crypted
+}
+
+function aesDecrypt(encrypted, key){
+    const decipher = crypto.createDecipher('aes192', key)
+    var decrypted = decipher.update(encrypted, 'hex', 'utf8')
+    decrypted += decipher.final('utf8')
+    return decrypted
+}
+
+var data = 'Hello, this is a secret message!'
+var key = 'password!'
+var encrypted = aesEncrypt(data, key)
+var decrypted = aesDecrypt(encrypted, key)
+console.log('plain text: ' + data);
+console.log('Encrypted text: ' + encrypted)
+console.log('Decrypted text: ' + decrypted)
+
+
+// DH算法（Diffie-Hellman）
+// 小明创建DH
+const crypto = require('crypto')
+var ming = crypto.createDiffieHellman(512)
+var ming_keys = ming.generateKeys();
+var prime = ming.getPrime()
+var generator = ming.getGenerator()
+// 把prime和generator发给小红
+console.log('prime:' + prime.toString('hex'))
+console.log('generator' + generator.toString('hex'))
+// 小红用拿到的prime和generator创建自己的DH
+var hong = crypto.createDiffieHellman(prime, generator)
+var hong_keys = hong.generateKeys();
+
+// 小明和小红收到对方的keys，计算自己的密钥
+var ming_secret = ming.computeSecret(hong_keys)
+var hong_secret = hong.computeSecret(ming_keys)
+
+console.log('secret of ming:' + ming_secret.toString('hex'))
+console.log('secret of hong:' + hong_secret.toString('hex'))
+
+
+// RSA 算法：非对称加密算法
+// 由一个私钥和公钥构成的密钥对，通过私钥加密，公钥解密，或公钥加密，私钥解密
+// 公钥可以公开，私钥必须保密
+// 首先，在命令行执行以下命令生成一个RSA密钥对
+openssl genrsa -aes256 -out rsa-key.pem 2048
+// 生成了加密的rsa-key.pem文件
+// 第二步，导出原始的私钥
+openssl rsa -in rsa-key.pem -outform PEM -out rsa-prv.pem
+// 第三步，导出原始的公钥
+openssl rsa -in rsa-key.pem -outform PEM -out rsa-pub.pem
+// 使用私钥加密公钥解密
+const
+    fs = require('fs')
+    crypto = require('crypto')
+// 从文件加载key
+function loadKey(file){
+    return fs.readFileSync(file, 'utf8')
+}
+let 
+    prvKey = loadKey('./rsa-prv.pem')
+    pubKey = loadKey('./rsa-pub.pem')
+    message = 'Hello, world!'
+// 私钥加密
+let enc_by_prv = crypto.privateEncrypt(prvKey, Buffer.from(message, 'utf-8'))
+console.log('encrypted by private key: ' + enc_by_prv.toString('hex'))
+// 公钥解密
+let dec_by_pub = crypto.publicDecrypt(pubKey, enc_by_prv)
+console.log('decrypted by public key: ' + dec_by_pub.toString('utf8'))
+// 公钥加密
+let enc_by_pub = crypto.publicEncrypt(pubKey, Buffer.from(message, 'utf-8'))
+console.log('encrypted by public key: ' + enc_by_pub.toString('hex'))
+// 私钥解密
+let dec_by_prv = crypto.privateDecrypt(prvKey, enc_by_pub)
+console.log('decrypted by private key: ' + dec_by_prv.toString('utf8'))
+
+// 如果我们的message很长，如1M, 这样就会data too large for key size错误，这是因为RSA加密的原始
+// 信息长度必须小于Key。一般情况下，RSA并不适合加密大数据，而是先生成一个随机的AES密码，用AES加密
+// 原始信息，然后用RSA加密AES口令。这样传给对方的密文分为两部分：1.AES加密的密文 2.RSA加密的AES口令
+// 对方先用RSA先解密出AES口令，再用AES解密密文，获得明文
+
+
+
+
+
+
