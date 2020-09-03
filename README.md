@@ -1,1 +1,144 @@
-# 学生管理系统
+# javaScript => es6.js
+- 碎片知识
+  - 比较运算符===
+  - strict模式
+  - 字符串操作方法
+  - 数组操作方式
+  - 删除对象的一个属性
+  - in 和 hasOwnProperty
+  - 遍历对象的所有属性
+  - 遍历array
+  - Map 和 Set
+  - iterable
+  - for...of...
+  - forEach()
+  - 回调函数的三个参数ele、index、self
+  - arguments参数
+  - rest参数
+- 函数
+  - rguments参数
+  - rest参数
+  - 块级作用域
+  - 解构赋值
+  - 再议this
+  - apply()和call()
+- Array的高阶方法
+  - map
+  - reduce
+  - filter
+  - sort排序
+  - every
+  - find
+  - findIndex
+  - forEach
+- 闭包
+- 箭头函数
+  - 箭头函数的this指向
+- generator
+- 标准对象
+  - 用typeof来判断数据的类型
+  - 用new包装对象
+  - Date对象
+- 正则表达式
+  - 创建正则表达式的两种方式
+  - 用正则表达式来切分字符串
+  - 分组
+  - 贪婪与非贪婪匹配
+  - 全局搜索
+  - lastIndex属性
+  - 提取数据
+- JSON
+- 面向对象编程
+  - class方式创建
+  - 继承
+
+# JQuery => jq.js
+- 选择器
+   -  按ID查找
+   -  jQ对象和dom相互转换
+   -  按Tag
+   -  按class
+   -  查找有多个class的节点
+   -  按属性
+   -  组合查找
+   -  多项选择器
+- 层级选择器
+  - 多层选择
+  - 子选择器
+  - 过滤器
+  - 表单相关
+  - 所有可见的div
+  - 所有隐藏的div
+- 查找和过滤
+  - find()
+  - parent()向上查找
+  - next()
+  - prev()
+  - 过滤
+  - 传入一个过滤函数
+  - map()
+  - first() last() slice()
+- 操作DOM
+  - test()
+  - html()
+  - CSS操作
+    - css()方法
+    - 链式调用
+    - 获取css属性
+    - 设置css属性
+    - 清除css属性
+  - addClass() hasClass() removeClass()
+  - 显示和隐藏DOM的两种方法
+    - 设置CSS的display属性为none
+    - show() hide()
+  - 获取DOM信息
+    - 浏览器窗口大小
+    - HTML文档大小
+    - 某个div大小
+    - 设置大小
+    - attr() removeAttr()
+    - prop()
+    - is()
+  - 操作表单
+    - val()方法
+- 修改DOM结构
+  - 添加节点
+    - append()
+    - append可以支持传入DOM对象，jq对象，函数对象
+    - prepend()
+    - after()
+  - 删除节点
+    - remove()
+- 事件
+  - on():绑定时间
+  - 绑定事件简化写法
+  - 常用事件列举
+    - 鼠标事件
+    - 键盘事件
+    - 其他事件
+  - ready事件
+  - 事件参数：从传入的Event对象获取
+  - off()取消绑定
+  - 事件触发条件
+    - change()主动触发
+- 动画
+  - 实现动画原理
+  - show() hide() toggle()
+  - slideUp() slideDown()
+  - fadeIn() fadeOut
+  - 自定义动画
+    - animate()
+    - 串行动画
+- AJAX
+  - 原理
+  - 机制
+  - 传统方式
+  - jQuery方式
+- 扩展插件
+  - 原理：为所有的jQ对象自定义一个方法，这种方法称为编写JQ插件
+  - 编写jq插件
+    - 返回this支持链式调用
+  - 使用插件
+  - 带参数的插件
+    - extend方法妙用
+  - 针对特定元素的扩展
